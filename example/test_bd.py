@@ -1,6 +1,6 @@
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from diffusionModel import ICWeighterICWeighterICWeighterICWeighter, IC
+from diffusionModel import ICWeighter, IC
 from algorithm import DegreeCentrality
 from dataset import load_network
 
