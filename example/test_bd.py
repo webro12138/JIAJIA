@@ -1,7 +1,7 @@
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
-from diffusionModel import ICWeighter, IC
-from algorithm import BasedDegree
+from diffusionModel import ICWeighterICWeighterICWeighterICWeighter, IC
+from algorithm import DegreeCentrality
 from dataset import load_network
 
 ## 读取网络
@@ -14,7 +14,7 @@ weighter = ICWeighter(APType="random", p=(0, 1))
 ic = IC(weighter=weighter, MC=10000, verbose=True)
 
 ## 定义degree中心性算法
-dc = BasedDegree(verbose=True)
+dc = DegreeCentrality(verbose=True)
 
 ## 度中心性选择种子节点
 S = dc(network, k=5)

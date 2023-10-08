@@ -1,5 +1,5 @@
 from algorithm import AlgorithmBase
-class BasedDegree(AlgorithmBase):
+class DegreeCentrality(AlgorithmBase):
     def __init__(self, verbose=True):
         super().__init__()
         self._verbose = verbose
