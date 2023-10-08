@@ -1,0 +1,4 @@
+layerID layerLabel
+1 direct_interaction
+2 physical_association
+3 association

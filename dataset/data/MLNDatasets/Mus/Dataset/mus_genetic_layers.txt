@@ -1,0 +1,8 @@
+layerID layerLabel
+1 physical_association
+2 association
+3 direct_interaction
+4 colocalization
+5 additive_genetic_interaction_defined_by_inequality
+6 synthetic_genetic_interaction_defined_by_inequality
+7 suppressive_genetic_interaction_defined_by_inequality
