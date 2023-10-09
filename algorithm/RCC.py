@@ -61,17 +61,23 @@ class RCC(AlgorithmBase):
         self._verbose = verbose
     
     def get_score(self, network):
-        score = {}
-        for key in network.nodes():
-            score[key] = 0
+        if(isinstance(network, MLN)):
+            score = {}
+            for key in network.nodes():
+                score[key] = 0
 
-        for layer in network.layers:
+            for layer in network.layers:
+                tracks = []
+                for _ in range(self._walk_iter):
+                    tracks += node2vec_walk(layer, random.choice(list(layer.nodes)), self._walk_length, self._p, self._q)
+                temp = count_frequency(tracks)
+                for key in temp:
+                    score[key] += temp[key]
+        if(isinstance(network, SLN)):
             tracks = []
             for _ in range(self._walk_iter):
                 tracks += node2vec_walk(layer, random.choice(list(layer.nodes)), self._walk_length, self._p, self._q)
-            temp = count_frequency(tracks)
-            for key in temp:
-                score[key] += temp[key]
+            score = count_frequency(tracks)
         score = dict(sorted(score.items(), key=lambda x: x[1], reverse=True))
         return score
             
