@@ -30,7 +30,7 @@ class SAW_ASA(AlgorithmBase):
             features = load_json(self._features_read_path)
             print("特征读取成功")
         else:
-            features = extract_centrality()
+            features = self.extract_centrality()
             if(self._features_save_path):
                 save_json(features)
                 print("特征保存成功")
@@ -43,10 +43,10 @@ class SAW_ASA(AlgorithmBase):
     def simulated_annealing(self, candidate_pool):
         r = 0
         S = candidate_pool[0:self.k]
-        influence_spread = EDV(G, S)
+        influence_spread = self._diffusion_model.approx_func(self.network, S)
         new_S = deepcopy(S)
         new_influence_spread = 0
-        while(T_h > T_f):
+        while(self._T_h > self._T_f):
             for _ in range(20):
                 C = set(candidate_pool) - set(S)
                 s = random.choice(list(C))
@@ -63,8 +63,9 @@ class SAW_ASA(AlgorithmBase):
                     r += 1   
             self._T_h = self._T_h - self._theta * np.log(r + 1)
             if(self._verbose):
-                print(f"正在进行模拟退火|fitness:{influence_spread:.4f}        ", end="\r")
-            
+                print(f"正在进行模拟退火|{self._T_h:.4f}|{self._T_f:.4f}|fitness:{influence_spread:.4f}        ", end="\r")
+        if(self._verbose):
+            print("                                                                           ",end="\r")    
         return S
 
     def candidate_pool_selection(self, rank):
@@ -73,7 +74,7 @@ class SAW_ASA(AlgorithmBase):
         allNodes = list(self.network.nodes())
         score = {}
         for i in range(n):
-            score[allNodes[i]] = rank
+            score[allNodes[i]] = rank[i]
     
         score = sorted(score.items(), key=lambda x:x[1], reverse=True)
     
@@ -89,13 +90,13 @@ class SAW_ASA(AlgorithmBase):
         return np.matmul(M,  W.T)
 
     def extract_centrality(self):
-        degree = nx.degree(self.network)
-        betweenness = nx.betweenness_centrality(self.network)
-        closeness = nx.closeness.closeness_centrality(self.network)
-        eigenvector = nx.eigenvector_centrality(self.network, max_iter=600)
+        degree = self.network.degrees()
+        betweenness = nx.betweenness_centrality(self.network._graph)
+        closeness = nx.closeness.closeness_centrality(self.network._graph)
+        eigenvector = nx.eigenvector_centrality(self.network._graph, max_iter=600)
         
         features = []
-        for node in self.network:
+        for node in self.network.nodes():
             features.append([degree[node], betweenness[node], closeness[node], eigenvector[node]])
 
         if(self._verbose):
