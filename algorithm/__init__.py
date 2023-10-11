@@ -5,3 +5,4 @@ from algorithm.RCC import RCC
 from algorithm.PSOBMIM import PSOBMIM
 from algorithm.CELF import CELF
 from algorithm.RandomSelect import RandomSelect
+from algorithm.SAW_ASA import SAW_ASA

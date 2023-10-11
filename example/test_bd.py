@@ -1,7 +1,7 @@
 import os, sys
 sys.path.append(os.path.join(os.path.dirname(__file__), ".."))
 from diffusionModel import ICWeighter, IC
-from algorithm import DegreeCentrality
+from algorithm import DegreeCentrality, SAW_ASA
 from dataset import load_network
 
 ## 读取网络
@@ -16,8 +16,11 @@ ic = IC(weighter=weighter, MC=10000, verbose=True)
 ## 定义degree中心性算法
 dc = DegreeCentrality(verbose=True)
 
+## 定义SAW_ASA算法
+saw_asa = SAW_ASA(ic)
+
 ## 度中心性选择种子节点
-S = dc(network, k=5)
+S = saw_asa(network, k=5)
 
 ## 使用IC模型衡量S的质量
 influence_spread = ic(network, S)
