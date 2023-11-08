@@ -8,7 +8,7 @@ class SLN(Network):
         if(type(graph) == nx.DiGraph):
             self.gtype="directed"
         self._graph = graph
-
+        
     def number_of_edges(self):
         return self._graph.number_of_edges()
         
@@ -52,5 +52,8 @@ class SLN(Network):
     def get_node_attr(self, node, attr_name):
         return self._graph.nodes[node][attr_name]
     
- 
+    def average_degree(self):
+        return sum(dict(nx.degree(self._graph)).values()) / self.number_of_nodes()
 
+    def pageRank(self, max_iters=600):
+        return dict(nx.pagerank(self._graph, max_iter=max_iters))

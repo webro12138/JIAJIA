@@ -5,7 +5,8 @@ class Network(object):
     
     def set_type_of_weight(self, type_of_weight):
         self._type_of_weight = type_of_weight
-    
+    def is_weighted(self):
+        return self._type_of_weight != None
     def set_name(self, name):
         self._name = name
 

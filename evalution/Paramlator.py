@@ -1,6 +1,4 @@
-from algorithm import PSOBMIM
 import itertools
-import numpy as np
 from network import Network
 class Paramlator:
     def __init__(self, metric, networks, k, alg) -> None:

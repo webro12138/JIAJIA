@@ -4,3 +4,6 @@ from algorithm.DegreeCentrality import DegreeCentrality
 from algorithm.CELF import CELF
 from algorithm.RandomSelect import RandomSelect
 from algorithm.SAW_ASA import SAW_ASA
+from algorithm.NCVoteRank import NCVoteRank
+from algorithm.PageRank import PageRank
+from algorithm.DegreeDiscount import DegreeDiscount
