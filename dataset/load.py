@@ -60,7 +60,7 @@ def load_base_single_network(name, gtype):
     '''    
 
     ##按照base格式获取数据集的路径
-    path = os.path.join(DATASETS_PATH, "SLNDatasets", name, "edge.txt")
+    path = os.path.join(DATASETS_PATH, "SLNDatasets", name, "edges.txt")
     if(gtype =="undirected"):
         graph = nx.read_edgelist(path, create_using=nx.Graph(), nodetype=int)
     else:

@@ -5,7 +5,7 @@ from algorithm import DegreeCentrality, SAW_ASA, NCVoteRank, PageRank, DegreeDis
 from dataset import load_networks
 from evalution import Evalution, InfluenceSpread
 ## 读取网络
-networks = load_networks(["soc-wiki-Vote"], "undirected")
+networks = load_networks(["filmtrust"], "undirected")
 
 ## 定义权重生成器
 weighter = SIRWeighter(APType="uniform", RPType="uniform", p=0.1, q=1)
@@ -34,5 +34,5 @@ degree_discount = DegreeDiscount()
 ## 定义Influence spread指标
 IS = InfluenceSpread(sir)
 ## 使用IC模型衡量S的质量
-ev = Evalution([IS], networks, [pagerank, degree_discount, nc_vote_rank], [50])
+ev = Evalution([IS], networks, [pagerank, degree_discount, nc_vote_rank, saw_asa], [50])
 print(ev())

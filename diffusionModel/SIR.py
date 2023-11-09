@@ -93,3 +93,28 @@ class SIR(DiffusionBase):
     
     def __call__(self, network, S: list):
         return self.simulate(network, S)
+
+    def inactive_probability(self, node):
+        if(self._network.gtype=="directed"):
+            neighbors = list(self._network.predecessors(node))
+        else:
+            neighbors = list(self._network[node])
+        prob = 1.0
+        for neighbor in neighbors:
+            if(neighbor in self._S):
+                weight = self._network[neighbor][node]["weight"]
+                prob *= (1 - weight)
+        return prob
+
+    def approx_func(self, network, S):
+        self.set_network(network)
+        self.set_S(S)
+        self._weighter.assign_weights(self._network)
+        neighbors = self._network.neighbors(S)
+        
+        edv = len(self._S)
+        for node in self._network.nodes():
+            if node not in self._S and node in neighbors:
+                edv += 1 - self.inactive_probability(node)
+      
+        return edv

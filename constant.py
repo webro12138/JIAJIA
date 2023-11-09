@@ -16,7 +16,7 @@ RESULT_PATH = os.path.join(ROOT_PATH, "result")
 BASE_MULTILAYER_NETWORK_DATASETS = ["Celegans", "CKM", "Gallus", "LMT", "Rattus", "Mus", "PierreAuger", "SacchPomb", "HumanHIV1", "LMT", "EUAir", "CElegans", "Plasmodium"]
 
 # 支持单层网络数据集
-SINGLE_LAYER_NETWORK_DATASETS = ["facebook", "soc-wiki-Vote"]
+SINGLE_LAYER_NETWORK_DATASETS = ["facebook", "soc-wiki-Vote", "CA-HepTh", "CA-AstroPh", "deezer_target", "facebook", "filmtrust", "lastfm_asia", "NetPHY", "soc-wiki-Vote", "Stelzl"]
 
 # LF存储格式的多层网络
 LF_MULTILAYER_NETWORK_DATASETS = ["Multi_lastfm_asia", "Multi-Soc-wiki-Vote"]
